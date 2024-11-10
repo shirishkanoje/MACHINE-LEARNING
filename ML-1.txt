@@ -1,0 +1,79 @@
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+
+
+df = pd.read_csv('Heart.csv')
+
+df.head()
+
+#a) Find Shape of Data
+
+df.shape
+
+#b) Find Missing Values
+
+df.isnull().sum()
+
+df.count()
+
+#c) Find data type of each column
+
+df.info()
+
+df.dtypes
+
+#d) Finding out Zero's
+
+df==0
+
+df[df==0]
+
+(df == 0).sum()
+
+#e) Find Mean age of patients
+
+np.mean(df['Age'])
+
+df.Age.mean()
+
+df['Age'].mean()
+
+#f) Now extract only Age, Sex, ChestPain, RestBP, Chol. Randomly divide dataset in training (75%) and testing (25%)
+
+df.columns
+
+newdf = df[['Age', 'Sex', 'ChestPain', 'RestBP', 'Chol']]
+
+newdf
+
+#cross validation
+
+train,test = train_test_split(df,test_size=0.25,random_state=0)
+
+train.shape
+
+test.shape
+
+actual = list(np.ones(45)) + list(np.zeros(55))
+np.array(actual)
+
+
+predicted = list(np.ones(40)) +list(np.zeros(52)) +list(np.ones(8))
+np.array(predicted)
+
+type(predicted)
+
+#Confusion Matrix
+
+from sklearn.metrics import ConfusionMatrixDisplay
+
+ConfusionMatrixDisplay.from_predictions(actual,predicted)
+
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+
+
+
